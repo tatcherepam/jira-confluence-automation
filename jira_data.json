@@ -1,0 +1,10 @@
+{
+  "issues": [
+    {"key": "PROJ-101", "summary": "API performance tuning", "status": "Done", "assignee": "Alice", "priority": "High"},
+    {"key": "PROJ-102", "summary": "Improve login validation", "status": "Done", "assignee": "Bob", "priority": "High"},
+    {"key": "PROJ-103", "summary": "Refactor deployment script", "status": "In Progress", "assignee": "Cleo", "priority": "Medium"},
+    {"key": "PROJ-104", "summary": "Fix notification delay", "status": "Blocked", "assignee": "Drew", "blocked_by": "Waiting on vendor API credentials", "priority": "Critical"},
+    {"key": "PROJ-105", "summary": "Add audit logging", "status": "Review", "assignee": "Eve", "priority": "High"},
+    {"key": "PROJ-106", "summary": "Finalize release checklist", "status": "Waiting", "assignee": "Frank", "blocked_by": "Approval pending from QA", "priority": "Medium"}
+  ]
+}
