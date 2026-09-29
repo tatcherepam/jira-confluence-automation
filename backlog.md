@@ -4,8 +4,22 @@
 
 - Every phase must leave the application in a runnable, verifiable state.
 - Work is ordered by the agreed priority: data foundation, executive visibility, interactive exploration, balanced MVP integration, then visual polish.
-- Integration is limited to mock-data integration. Live Jira access, authentication, and API calls are not part of this backlog.
+- The initial dashboard release remains mock-data-only. Live Jira/Confluence access is deferred until separately approved.
+- Use MCP for authorized access to external Jira or Confluence content; use custom skills/instructions for repeatable workflow, normalization, calculation, and reporting behavior.
+- Do not connect the React browser UI directly to an MCP server or embed Atlassian credentials in frontend code. Any future live app integration requires an explicitly designed trusted backend/provider boundary.
 - Each task should be completed with the smallest focused change possible and verified before moving on.
+
+### MCP and Custom Skills Responsibilities
+
+| Capability | Responsibility in this project | Initial release |
+| --- | --- | --- |
+| Atlassian Rovo MCP server | Optional, deferred access to Jira/Confluence data using Atlassian OAuth and the signed-in user's permissions. Candidate endpoint: `https://mcp.atlassian.com/v1/mcp/authv2`. Inspect the tools exposed to the tenant/client before relying on specific operations. | Not configured or required |
+| Jira MCP operations | In a future approved integration, retrieve sprint, issue, epic, status, owner, estimate, and blocker context that the authorized MCP tools expose. | Replaced by dedicated mock data |
+| Confluence MCP operations | In a future approved workflow, search/fetch relevant project notes and optionally create/update a report page only when the required write tool and permission are explicitly approved. | Not used |
+| Custom skills or agent instructions | Define repeatable orchestration: choose relevant Jira/Confluence queries, map retrieved records to the dashboard data contract, calculate hour-based metrics and RAG precedence, explain risks, and format leadership summaries. These rules do not grant access to Atlassian data. | Not required for rendering; existing project instructions remain separate |
+| Dashboard application code | Render data, manage filters, and calculate deterministic view state through the provider and selector layers. | Uses mock provider only |
+
+The repository currently contains focused `.agent.md` workflow instructions, not packaged Agent Skills with a `SKILL.md` manifest. Keep that distinction clear: instruction/skill files define agent behavior; MCP servers expose external tools and data. Do not add live access to this backlog's implementation scope without approval.
 
 ## Phase 1: Setup
 
@@ -89,7 +103,7 @@
 
 ## Phase 3: Integration
 
-**Phase outcome:** Mock data is integrated through a replaceable data boundary without introducing live Jira dependencies.
+**Phase outcome:** The initial release integrates mock data through a replaceable provider. A future Atlassian MCP connection is documented as an optional, separately approved extension and is not required for this phase to exit.
 
 - [ ] **P1** Define a `SprintDataProvider` or equivalent interface for retrieving sprint and work item data.
 - [ ] **P1** Implement a local mock provider that returns the dedicated sprint dataset.
@@ -97,10 +111,13 @@
 - [ ] **P1** Define the provider response shape for loading, success, empty, and error states.
 - [ ] **P1** Add a deterministic mock refresh path so repeated runs produce the same dashboard state.
 - [ ] **P1** Add fixture data for full, filtered, empty, blocked, and mixed-risk scenarios.
-- [ ] **P2** Document the future Jira adapter boundary without implementing network calls or credentials.
+- [ ] **P2** Document the optional Atlassian Rovo MCP server for future assistant-driven Jira/Confluence lookup, including OAuth, user-scoped permissions, admin policy, and the need to inspect available tools.
+- [ ] **P2** Document that any future dashboard runtime integration needs an approved server-side/provider design; do not call Atlassian MCP directly from browser code.
+- [ ] **P2** Define a mapping from authorized MCP-returned Jira fields to the local sprint/work-item contract, without enabling live requests in the MVP.
+- [ ] **P2** Define which interpretation tasks belong in custom skills/instructions: query selection, data normalization, metric/RAG explanation, and leadership report formatting.
 - [ ] **P2** Verify that swapping the mock provider does not require changing KPI, filter, or presentation components.
 
-**Phase 3 exit criteria:** The dashboard runs entirely on a documented mock provider and the UI is decoupled from the raw data source.
+**Phase 3 exit criteria:** The dashboard runs entirely on a documented mock provider and the UI is decoupled from raw data. MCP setup, credentials, and live Atlassian calls remain deferred.
 
 ## Phase 4: Testing
 
@@ -124,6 +141,7 @@
 - [ ] **P1** Test epic selection updates the epic filter and visible results.
 - [ ] **P1** Test empty filtered results render an intentional empty state.
 - [ ] **P1** Test the UI consumes the mock provider rather than importing raw data directly.
+- [ ] **P2** If an MCP adapter is approved later, test mapping using recorded/synthetic fixtures and keep normal test runs independent of Atlassian credentials and network access.
 
 ### 4.3 Accessibility and Responsive Checks
 
@@ -156,6 +174,8 @@
 - [ ] **P1** Document the sprint and work item data contract with valid field values.
 - [ ] **P1** Document metric formulas for completion, status effort, team risk, aggregate risk, and scope change.
 - [ ] **P1** Document the mock provider interface and how a future Jira adapter would replace it.
+- [ ] **P1** Document the boundary between MCP data access and custom skill/instruction behavior, including which work remains mock-only in the MVP.
+- [ ] **P2** If Atlassian MCP is approved, document the official Rovo MCP endpoint, OAuth setup, required minimum permissions, administrator controls, and how to inspect tool availability.
 - [ ] **P1** Document local troubleshooting for empty data, failed builds, and occupied development ports.
 - [ ] **P2** Add contribution guidance for adding teams, epics, owners, statuses, and test fixtures.
 
@@ -186,4 +206,4 @@
 - [ ] The production build succeeds.
 - [ ] Core calculations, filters, expansions, provider integration, accessibility, and responsive behavior are tested.
 - [ ] Developer and user documentation are complete and consistent with the implementation.
-- [ ] No live Jira credentials, API calls, or unrelated root-level automation files are introduced.
+- [ ] No live Jira/Confluence credentials, API calls, MCP configuration, or unrelated root-level automation files are introduced into the initial release unless separately approved.
