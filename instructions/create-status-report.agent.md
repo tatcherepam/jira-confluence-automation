@@ -3,11 +3,12 @@
 Generate a weekly status report using these rules:
 
 - Output format: Markdown.
-- Include exactly these sections:
-  - Accomplishments
-  - Blockers
-  - Next week
-- Use bullet points only for all report content.
+- Include exactly these sections, in this order:
+  - `**Accomplishments**`
+  - `**Blockers**`
+  - `**Next week**`
+- Format each section as a separate paragraph: put the bold section header on its own line, leave one blank line, then add the section's bullet points.
+- Use bullet points for all content beneath the section headers.
 - Keep the complete report to a maximum of 20 lines.
 - Use a professional, direct tone.
 - Do not use fluff words, filler, greetings, or unnecessary conclusions.

@@ -1,0 +1,14 @@
+**Accomplishments**
+
+- Completed the sprint progress KPI dashboard feature.
+- Completed the three-team comparison feature.
+- Completed expandable risk and epic detail views.
+
+**Blockers**
+
+- Finance schema approval is blocking invoice export validation; owner: Finance platform lead; decision needed by September 29, 2026.
+
+**Next week**
+
+- Resolve the finance schema dependency and complete invoice export validation.
+- Run responsive and accessibility checks before release review.

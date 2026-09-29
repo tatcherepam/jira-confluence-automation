@@ -6,3 +6,7 @@ Each entry below is an instruction file with a one-line description. Load the ma
 	+ Keywords: create instruction, update instruction, custom instructions, instruction catalog, Copilot setup
 - [`./instructions/create-status-report.agent.md`](./create-status-report.agent.md) — Generate a concise weekly status report with fixed sections and format.
 	+ Keywords: weekly status report, accomplishments, blockers, next week, team report
+- [`./instructions/write-project-specification.agent.md`](./write-project-specification.agent.md) — Create a structured Markdown technical specification from project requirements.
+	+ Keywords: project specification, technical specification, requirements document, acceptance criteria, data contract
+- [`./instructions/create-technical-backlog.agent.md`](./create-technical-backlog.agent.md) — Break a project specification into a phased, actionable implementation backlog.
+	+ Keywords: technical backlog, implementation backlog, phased plan, setup, core features, integration, testing, documentation

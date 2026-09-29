@@ -14,7 +14,8 @@ Create a structured technical specification in Markdown from the user's requirem
 - Define measurable formulas or rules for derived metrics where applicable.
 - Include a recommended file structure when it will help implementation.
 - Include acceptance criteria that can be checked by tests or manual verification.
-- Save the result as `project_spec.md` in the project root unless the user specifies another path.
+- Determine the output path before drafting: if the user specifies a filename or path, use that exact path; otherwise save the result as `project_spec.md` in the project root.
+- Never silently rename an explicitly requested output file or substitute the default filename after the user has provided a different path.
 - Use ASCII by default and avoid unrelated file changes.
 
 ## Output Structure
@@ -37,4 +38,5 @@ Use these sections when applicable:
 
 - Check the Markdown for formatting or whitespace errors.
 - Verify that every major requirement from the source material is represented.
-- Report the output path and validation result after saving.
+- Verify that the file exists at the requested or default path and that its filename matches the instruction used.
+- Report the exact output path and validation result after saving.
